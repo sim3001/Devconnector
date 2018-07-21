@@ -4,6 +4,7 @@ const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
+const passport = require("passport");
 
 //Load User Model
 const User = require("../../models/User");
@@ -75,7 +76,11 @@ router.post("/login", (req, res) => {
         if (isMatch) {
           //User matched
           //JWT PAYLOAD for Token
-          const payload = { id: user.id, name: user.name, avatar: user.avatar };
+          const payload = {
+            id: user.id,
+            name: user.name,
+            avatar: user.avatar
+          };
           //Sign JWT Token
           jwt.sign(
             payload,
