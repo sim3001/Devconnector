@@ -10,7 +10,7 @@ const posts = require("./routes/api/posts");
 //Initalize App
 const app = express();
 //Bodyparser Express Version Setup
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 //======Initialize Mongoose and Database======//
 
@@ -19,9 +19,9 @@ const db = require("./config/keys").mongoURI;
 
 //Connect to MongoDB
 mongoose
-  .connect(db)
-  .then(() => console.log("Database Connected"))
-  .catch(err => console.log(err));
+    .connect(db)
+    .then(() => console.log("Database Connected"))
+    .catch(err => console.log(err));
 
 //Passport Middleware
 app.use(passport.initialize());
@@ -39,6 +39,6 @@ app.use("/api/posts", posts);
 const port = process.env.port || 5000;
 
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+    console.log(`Server running on port ${port}`);
 });
 //================================================//
