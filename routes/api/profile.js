@@ -5,6 +5,7 @@ const passport = require("passport");
 
 //Load Validation
 const validateProfileInput = require("../../validation/profile");
+const validateExperienceInput = require("../../validation/experience");
 //Load Profile Model
 const Profile = require("../../models/Profile");
 //Load User Model
@@ -172,6 +173,15 @@ router.post(
   "/experience",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    //Errors
+    const { errors, isValid } = validateExperienceInput(req.body);
+
+    //Check Validation
+    if (!isValid) {
+      //Return errors with 400 Status
+      return res.status(400).json(errors);
+    }
+    //Find Profile of logged in user
     Profile.findOne({ user: req.user.id }).then(profile => {
       const newExp = {
         title: req.body.title,
