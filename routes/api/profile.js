@@ -260,4 +260,27 @@ router.delete(
   }
 );
 
+// @route   DELETE api/profile/education/:edu_id
+// @desc    Delete Education from profile
+// @access  Private
+router.delete(
+  "/education/:edu_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    //Find Profile of logged in user
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        // get remove index
+        const removeIndex = profile.education
+          .map(item => item.id)
+          .indexOf(req.params.edu_id);
+        //Splice out of array
+        profile.education.splice(removeIndex, 1);
+        //Save profile
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
 module.exports = router;
