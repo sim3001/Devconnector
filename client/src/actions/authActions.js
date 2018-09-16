@@ -1,6 +1,6 @@
 import axios from "axios";
-
-import { TEST_DISPATCH } from "./types";
+//Import Types
+import { GET_ERRORS } from "./types";
 
 // Register User
 export const registerUser = userData => dispatch => {
