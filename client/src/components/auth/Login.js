@@ -63,6 +63,7 @@ class Login extends Component {
                     onChange={this.onChange}
                     error={errors.email}
                   />
+                  {/* Difference between using component and not */}
                   {/*                   <div className="form-group">
                     <input
                       type="email"
@@ -78,21 +79,14 @@ class Login extends Component {
                       <div className="invalid-feedback">{errors.email}</div>
                     )}
                   </div> */}
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.password
-                      })}
-                      placeholder="Password"
-                      value={this.state.password}
-                      onChange={this.onChange}
-                      name="password"
-                    />
-                    {errors.password && (
-                      <div className="invalid-feedback">{errors.password}</div>
-                    )}
-                  </div>
+                  <TextFieldGroup
+                    placeholder="Password"
+                    name="password"
+                    type="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
+                    error={errors.password}
+                  />
                   <input
                     type="submit"
                     className="btn btn-info btn-block mt-4"
